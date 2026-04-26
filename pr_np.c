@@ -17,7 +17,7 @@ int main(){
     while(completed<n){
         int min_pr=9999,idx=-1;
         for(i=0;i<n;i++){
-            if(!done[i] && at[i]<=time && pr[i]<min_pr){
+            if(!done[i] && at[i]<=time && (pr[i]<min_pr || (pr[i]==min_pr && at[i]<at[idx]))){
                 min_pr=pr[i];
                 idx=i;
             }
