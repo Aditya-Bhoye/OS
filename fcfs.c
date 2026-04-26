@@ -1,7 +1,7 @@
 #include<stdio.h>
 int main(){
     int n,i,j,temp,time=0;
-    int at[20],bt[20],ct[20],tat[20],wt[20],order[20],exec[20];
+    int at[20],bt[20],ct[20],tat[20],wt[20],order[20]; 
     printf("Enter number of process you want : ");
     scanf("%d",&n);
     if(n<=0){printf("No requests");return 0;}
@@ -25,7 +25,6 @@ int main(){
         if(time<at[i]) time=at[i];
         time+=bt[i];
         ct[i]=time;
-        exec[i]=i;
     }
     float total_tat=0,total_wt=0;
     for(i=0;i<n;i++){
@@ -36,7 +35,7 @@ int main(){
     }
     printf("Process\tAT\tBT\tCT\tTAT\tWT\n");
     for(i=0;i<n;i++){
-        int x=exec[i];
+        int x=order[i]; 
         printf("P%d\t%d\t%d\t%d\t%d\t%d\n",x,at[x],bt[x],ct[x],tat[x],wt[x]);
     }
     printf("\n-------------------\n");
@@ -48,7 +47,7 @@ int main(){
             time=at[i];
         }
         time+=bt[i];
-        printf(" P%d |",exec[i]);
+        printf(" P%d |",order[i]); 
     }
     printf("\n-------------------\n");
     time=0;
