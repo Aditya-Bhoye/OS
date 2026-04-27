@@ -45,7 +45,7 @@ int main(){
     total+=diff;
     head=0;diff=0;
     for(i=0;i<n;i++){
-        if(req[i<start]){
+        if(req[i]<start){
             int diff=abs(head-req[i]);
             printf("%d\t| %d\n",req[i],diff);
             total+=diff;
