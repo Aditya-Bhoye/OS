@@ -1,27 +1,20 @@
 #include<stdio.h>
 #include<stdlib.h>
 int main(){
-    int n,i,head,total=0;
-    int req[50];
+    int n,i,head,total=0,req[20];
     printf("Enter number of requests : ");
     scanf("%d",&n);
-    if(n<=0){
-        printf("No requests \n");
-        return 0;
-    }
-    printf("Enter requests sequence : ");
-    for(i=0;i<n;i++){
-        scanf("%d",&req[i]);
-    }
-    printf("Enter head movement : ");
+    printf("Enter request sequence : ");
+    for(i=0;i<n;i++){scanf("%d",&req[i]);}
+    printf("Enter current head movement : ");
     scanf("%d",&head);
-    printf("CURRENT\tHEAD MOVEMENT\n");
-    printf("%d\t%d\n",head,0);
+    printf("Current\t| Head Movement\n");
+    printf("%d\t| 0\n",head);
     for(i=0;i<n;i++){
         int diff=abs(head-req[i]);
-        printf("%d\t%d\n",req[i],diff);
-        total+=diff;
+        printf("%d\t| %d\n",req[i],diff);
         head=req[i];
+        total+=diff;
     }
-    printf("\nTotal Seak Time : %d\n",total);
+    printf("Total seak length : %d\n",total);
 }
