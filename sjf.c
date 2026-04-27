@@ -1,35 +1,68 @@
-#include <stdio.h>
+#include<stdio.h>
 int main(){
-    int n,i;
+    int n,i,time=0,completed=0,k=0;
     int at[20],bt[20],ct[20],tat[20],wt[20],done[20],exec[20];
-
+    printf("Enter number of process you want : ");
     scanf("%d",&n);
     for(i=0;i<n;i++){
-        scanf("%d%d",&at[i],&bt[i]);
+        printf("Enter arrival time for process P%d : ",i);
+        scanf("%d",&at[i]);
+        printf("Enter brust time for process P%d : ",i);
+        scanf("%d",&bt[i]);
         done[i]=0;
     }
-    int time=0,completed=0,k=0;
     while(completed<n){
         int idx=-1;
         for(i=0;i<n;i++){
             if(!done[i] && at[i]<=time){
-                if(idx==-1 || bt[i]<bt[idx] || (bt[i]==bt[idx] && at[i]<at[idx]))
+                if(idx==-1 || bt[i]<bt[idx] || (bt[i]==bt[idx] && at[i]<at[idx])){
                     idx=i;
+                }
             }
         }
-        if(idx==-1){ time++; continue; }
+        if(idx==-1){ time++; continue ;}
         exec[k++]=idx;
         time+=bt[idx];
         ct[idx]=time;
         done[idx]=1;
         completed++;
     }
+    float total_tat=0,total_wt=0;
     for(i=0;i<n;i++){
         tat[i]=ct[i]-at[i];
         wt[i]=tat[i]-bt[i];
+        total_tat+=tat[i];
+        total_wt+=wt[i];
     }
+    printf("Process\tAT\tBT\tCT\tTAT\tWT\n");
     for(i=0;i<n;i++){
         int x=exec[i];
-        printf("P%d %d %d %d %d %d\n",x,at[x],bt[x],ct[x],tat[x],wt[x]);
+        printf("P%d\t%d\t%d\t%d\t%d\t%d\n",x,at[x],bt[x],ct[x],tat[x],wt[x]);
     }
+    printf("\n----------------------\n");
+    printf("|");
+    time=0;
+    for(i=0;i<n;i++){
+        int x=exec[i];
+        if(time<at[x]){
+            printf(" IDLE |");
+            time=at[x];
+        }
+        time+=bt[x];
+        printf(" P%d |",x);
+    }
+    printf("\n----------------------\n");
+    time=0;
+    printf("%d",time);
+    for(i=0;i<n;i++){
+        int x=exec[i];
+        if(time<at[x]){
+            time=at[x];
+            printf("    %d",time);
+        }
+        time+=bt[x];
+        printf("    %d",time);
+    }
+    printf("\nAVG TAT : %.2f",total_tat/n);
+    printf("\nAVG WT : %.2f\n",total_wt/n);
 }
